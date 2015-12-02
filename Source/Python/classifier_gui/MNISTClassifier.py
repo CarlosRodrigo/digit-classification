@@ -9,12 +9,7 @@ def readData():
     mnist = fetch_mldata('MNIST original', data_home=DATA_PATH)
     return mnist
 
-def predict(value):
-    value = np.array(value)
-
-    pylab.imshow(value.reshape(28, 28), cmap="Greys")
-    pylab.show() 
-
+def initClassifier():
     mnist = readData()
 
     train = mnist.data[:60000]
@@ -24,6 +19,14 @@ def predict(value):
     test_labels = mnist.target[60000:]
 
     model = KNeighborsClassifier(n_neighbors=3, algorithm='brute').fit(train, train_labels)
+
+    return model
+
+def predict(model, value):
+    value = np.array(value)
+
+    pylab.imshow(value.reshape(28, 28), cmap="Greys")
+    pylab.show() 
 
     preds = model.predict(value)
 

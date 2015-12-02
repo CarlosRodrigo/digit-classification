@@ -3,7 +3,7 @@
 from Tkinter import *
 import random
 
-from MNISTClassifier import predict
+from MNISTClassifier import predict, initClassifier
 
 def gray_hex(grayvalue):
 	grayvalue = 255 - grayvalue
@@ -29,6 +29,7 @@ class MNISTGUI:
 		self.root.geometry('{}x{}'.format(569, 615))
 		
 		self.model = [0]*784
+		self.classifier = initClassifier()
 
 
 	def _on_resize(self, event):
@@ -94,7 +95,7 @@ class MNISTGUI:
 
 
 	def classify(self):
-		prediction = predict(self.model)
+		prediction = predict(self.classifier, self.model)
 		print 'Numero escrito foi', prediction
 
 

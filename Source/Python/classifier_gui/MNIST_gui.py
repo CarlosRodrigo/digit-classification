@@ -27,6 +27,7 @@ class MNISTGUI:
 		self.classify_button.pack(side=RIGHT)
 		
 		self.root.geometry('{}x{}'.format(569, 615))
+		self.root.wm_title("MNIST GUI Classifier")
 		
 		self.model = [0]*784
 

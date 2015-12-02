@@ -20,8 +20,8 @@ class MNISTGUI:
 		self.canvas.bind("<Button-1>", self._on_click)
 		self.canvas.bind("<B1-Motion>", self.paint)
 
-		self.button = Button(self.root, text="Classify", command=self.button_clicked)
-		self.button.pack()
+		self.classify_button = Button(self.root, text="Classify", command=self.classify)
+		self.classify_button.pack(side=LEFT)
 		
 		self.root.geometry('{}x{}'.format(569, 615))
 		
@@ -90,7 +90,7 @@ class MNISTGUI:
 		self.draw()
 
 
-	def button_clicked(self):
+	def classify(self):
 		prediction = predict(self.model)
 		print 'Numero escrito foi', prediction
 

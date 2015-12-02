@@ -79,7 +79,7 @@ class MNISTGUI:
 					if i == j == 0:
 						new_value = random.randint(230, 255)
 					else:
-						new_value = random.randint(175, 200)
+						new_value = random.randint(200, 210)
 
 					if new_value > current:
 						self.model[pos] = new_value

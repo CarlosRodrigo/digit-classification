@@ -117,7 +117,7 @@ def init_convnet():
         update=nesterov_momentum,
         update_learning_rate=0.01,
         update_momentum=0.9,
-        max_epochs=10,
+        max_epochs=5,
         verbose=1,
         )
 
@@ -127,13 +127,17 @@ def main():
     #load dataset
     X_train, y_train, X_val, y_val, X_test, y_test = load_dataset()
 
-    # Train the network
-    net = init_convnet()
-    nn = net.fit(X_train, y_train)
+    n = 5
+    fold = len(X_train) / n
+    fold_test = len(X_test) / n
+    for i in range(n):
+        print 'Fold', i+1
+        net = init_convnet()
+        nn = net.fit(X_train[fold*i:fold*(i+1)], y_train[fold*i:fold*(i+1)])
 
-    preds = net.predict(X_test)
+        preds = net.predict(X_test[fold_test*i:fold_test*(i+1)])
 
-    cm = confusion_matrix(y_test, preds)
-    plot_confusion_matrix(cm)
+        cm = confusion_matrix(y_test[fold_test*i:fold_test*(i+1)], preds)
+        plot_confusion_matrix(cm)
 
 main()

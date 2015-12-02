@@ -20,11 +20,11 @@ class MNISTGUI:
 		self.canvas.bind("<Button-1>", self._on_click)
 		self.canvas.bind("<B1-Motion>", self.paint)
 
-		self.classify_button = Button(self.root, text="Classify", command=self.classify)
-		self.classify_button.pack(side=LEFT)
-
 		self.reset_button = Button(self.root, text="Reset", command=self.canvas_reset)
-		self.reset_button.pack(side=RIGHT)
+		self.reset_button.pack(side=LEFT)
+
+		self.classify_button = Button(self.root, text="Classify", command=self.classify)
+		self.classify_button.pack(side=RIGHT)
 		
 		self.root.geometry('{}x{}'.format(569, 615))
 		

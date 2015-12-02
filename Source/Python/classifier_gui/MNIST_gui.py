@@ -22,6 +22,9 @@ class MNISTGUI:
 
 		self.classify_button = Button(self.root, text="Classify", command=self.classify)
 		self.classify_button.pack(side=LEFT)
+
+		self.reset_button = Button(self.root, text="Reset", command=self.canvas_reset)
+		self.reset_button.pack(side=RIGHT)
 		
 		self.root.geometry('{}x{}'.format(569, 615))
 		
@@ -93,6 +96,11 @@ class MNISTGUI:
 	def classify(self):
 		prediction = predict(self.model)
 		print 'Numero escrito foi', prediction
+
+
+	def canvas_reset(self):
+		self.model = [0]*784
+		self.draw()
 
 
 	def start(self):

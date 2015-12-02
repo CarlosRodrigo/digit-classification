@@ -2,7 +2,7 @@ from sklearn.datasets import fetch_mldata
 from sklearn.neighbors import NearestNeighbors
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
-import pylab
+import matplotlib.pyplot as plt
 
 def readData():
     DATA_PATH = '~/data'
@@ -25,8 +25,8 @@ def initClassifier():
 def predict(model, value):
     value = np.array(value)
 
-    pylab.imshow(value.reshape(28, 28), cmap="Greys")
-    pylab.show() 
+    plt.imshow(value.reshape(28, 28), cmap="Greys")
+    plt.show() 
 
     preds = model.predict(value)
 

@@ -19,6 +19,8 @@ from nolearn.lasagne import visualize
 
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
+from sklearn.cross_validation import KFold
+from sklearn.cross_validation import train_test_split
 
 def plot_confusion_matrix(cm):
     norm_conf = []
@@ -140,4 +142,24 @@ def main():
         cm = confusion_matrix(y_test[fold_test*i:fold_test*(i+1)], preds)
         plot_confusion_matrix(cm)
 
-main()
+def train():
+    #load dataset
+    X_train, y_train, X_val, y_val, X_test, y_test = load_dataset()
+
+    
+    X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=0)
+
+    net = init_convnet()
+    nn = net.fit(X_train, y_train)
+
+    preds = net.predict(X_test)
+
+    print "Classification report"
+    print
+    print classification_report(y_test, preds)
+
+    cm = confusion_matrix(y_test, preds)
+    plot_confusion_matrix(cm)
+
+# main()
+train()

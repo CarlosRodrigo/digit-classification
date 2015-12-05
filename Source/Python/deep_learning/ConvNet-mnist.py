@@ -21,6 +21,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.cross_validation import KFold
 from sklearn.cross_validation import train_test_split
+from sklearn.externals import joblib
 
 def plot_confusion_matrix(cm):
     norm_conf = []
@@ -153,6 +154,8 @@ def train():
     nn = net.fit(X_train, y_train)
 
     preds = net.predict(X_test)
+
+    joblib.dump(net, 'ConvNetModel.pkl') 
 
     print "Classification report"
     print

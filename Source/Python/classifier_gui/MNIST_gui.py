@@ -4,6 +4,8 @@ from Tkinter import *
 import random
 
 from MNISTClassifier import predict, initClassifier
+from sklearn.externals import joblib
+import numpy as np
 
 def gray_hex(grayvalue):
 	grayvalue = 255 - grayvalue
@@ -29,8 +31,8 @@ class MNISTGUI:
 		self.root.geometry('{}x{}'.format(569, 615))
 		self.root.wm_title("MNIST GUI Classifier")
 		
-		self.model = [0]*784
-		self.classifier = initClassifier()
+		self.model = np.zeros(784)
+		self.classifier = joblib.load('../deep_learning/ConvNetModel.pkl') 
 
 
 	def _on_resize(self, event):
@@ -96,12 +98,13 @@ class MNISTGUI:
 
 
 	def classify(self):
-		prediction = predict(self.classifier, self.model)
+		# prediction = predict(self.classifier, self.model)
+		prediction = self.classifier.predict(self.model.reshape((-1, 1, 28, 28)))
 		print 'Numero escrito foi', prediction
 
 
 	def canvas_reset(self):
-		self.model = [0]*784
+		self.model = np.zeros(784)
 		self.draw()
 
 
